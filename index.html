@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ISML Mathematics Exhibition 2026 - 2027</title>
+
+  <!-- Google Model Viewer Library for WebAR -->
+  <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body, html {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #050510;
+      font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    /* 3D AR Model Viewer canvas */
+    model-viewer {
+      width: 100vw;
+      height: 100vh;
+      background: radial-gradient(circle, #1a0033 0%, #050510 100%);
+    }
+
+    /* Floating Header - Welcome Bloom Animation */
+    .header-overlay {
+      position: absolute;
+      top: 24px;
+      width: 90%;
+      left: 5%;
+      text-align: center;
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    .welcome-card {
+      display: inline-block;
+      background: rgba(10, 5, 30, 0.85);
+      border: 2px solid #00e5ff;
+      border-radius: 18px;
+      padding: 14px 24px;
+      box-shadow: 0 0 25px rgba(0, 229, 255, 0.8), inset 0 0 15px rgba(255, 0, 255, 0.4);
+      animation: bloomFade 6s ease-in-out infinite;
+      backdrop-filter: blur(8px);
+    }
+
+    .welcome-title {
+      font-size: 19px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      background: linear-gradient(90deg, #00e5ff, #ffffff, #ff00ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: glowText 2s ease-in-out infinite alternate;
+    }
+
+    .welcome-year {
+      font-size: 14px;
+      color: #00ffcc;
+      margin-top: 5px;
+      font-weight: 700;
+      letter-spacing: 2px;
+    }
+
+    @keyframes glowText {
+      from { filter: drop-shadow(0 0 2px #00e5ff); }
+      to { filter: drop-shadow(0 0 12px #ff00ff); }
+    }
+
+    @keyframes bloomFade {
+      0% {
+        opacity: 0;
+        transform: scale(0.65) translateY(25px);
+      }
+      20% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+      80% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+      100% {
+        opacity: 0;
+        transform: scale(0.8) translateY(-15px);
+      }
+    }
+
+    /* Floating Math Concept Pills */
+    .floating-container {
+      position: absolute;
+      top: 110px;
+      width: 100%;
+      height: 65vh;
+      pointer-events: none;
+      z-index: 5;
+    }
+
+    .math-badge {
+      position: absolute;
+      padding: 8px 16px;
+      border-radius: 25px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      backdrop-filter: blur(6px);
+      animation: floatMotion 4s ease-in-out infinite alternate;
+    }
+
+    .badge-1 {
+      top: 10%;
+      left: 6%;
+      color: #00ffff;
+      border: 1.5px solid #00ffff;
+      background: rgba(0, 255, 255, 0.18);
+      box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+      animation-duration: 3.2s;
+    }
+
+    .badge-2 {
+      top: 30%;
+      right: 6%;
+      color: #ff33cc;
+      border: 1.5px solid #ff33cc;
+      background: rgba(255, 51, 204, 0.18);
+      box-shadow: 0 0 15px rgba(255, 51, 204, 0.5);
+      animation-duration: 4.2s;
+    }
+
+    .badge-3 {
+      top: 55%;
+      left: 10%;
+      color: #ffee00;
+      border: 1.5px solid #ffee00;
+      background: rgba(255, 238, 0, 0.18);
+      box-shadow: 0 0 15px rgba(255, 238, 0, 0.5);
+      animation-duration: 3.7s;
+    }
+
+    .badge-4 {
+      top: 72%;
+      right: 8%;
+      color: #00ff88;
+      border: 1.5px solid #00ff88;
+      background: rgba(0, 255, 136, 0.18);
+      box-shadow: 0 0 15px rgba(0, 255, 136, 0.5);
+      animation-duration: 4.5s;
+    }
+
+    @keyframes floatMotion {
+      from { transform: translateY(0px) rotate(-2deg); }
+      to { transform: translateY(-16px) rotate(2deg); }
+    }
+
+    /* Start AR Action Button */
+    #ar-button {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(135deg, #00e5ff, #ff00c8);
+      color: #ffffff;
+      font-weight: 800;
+      border: none;
+      border-radius: 40px;
+      padding: 15px 32px;
+      font-size: 15px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      box-shadow: 0 0 25px rgba(0, 229, 255, 0.9);
+      cursor: pointer;
+      z-index: 100;
+      animation: pulseBtn 1.8s infinite;
+    }
+
+    @keyframes pulseBtn {
+      0% { transform: translateX(-50%) scale(1); }
+      50% { transform: translateX(-50%) scale(1.05); }
+      100% { transform: translateX(-50%) scale(1); }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Floating Welcome Sign -->
+  <div class="header-overlay">
+    <div class="welcome-card">
+      <div class="welcome-title">WELCOME TO<br>ISML MATHS EXHIBITION</div>
+      <div class="welcome-year">2026 - 2027</div>
+    </div>
+  </div>
+
+  <!-- Floating Math Concepts -->
+  <div class="floating-container">
+    <div class="math-badge badge-1">📐 Trigonometry &bull; sin²θ + cos²θ = 1</div>
+    <div class="math-badge badge-2">🍕 Fractions &bull; ½ + ¼ = ¾</div>
+    <div class="math-badge badge-3">∫ Calculus &bull; dy/dx &bull; ∫ f(x)dx</div>
+    <div class="math-badge badge-4">🔺 Geometry &bull; A = πr² &bull; a² + b² = c²</div>
+  </div>
+
+  <!-- 3D AR Viewer (World Tracking for iOS and Android) -->
+  <model-viewer 
+    src="https://models.readyplayer.me/64633190a077de29911667b2.glb?morphTargets=none" 
+    alt="Glowing Fantasy Tree"
+    ar 
+    ar-modes="webxr scene-viewer quick-look" 
+    camera-controls 
+    auto-rotate 
+    rotation-per-second="25deg"
+    shadow-intensity="1.5"
+    exposure="1.2">
+    
+    <button slot="ar-button" id="ar-button">
+      ✦ VIEW IN YOUR SPACE (AR) ✦
+    </button>
+  </model-viewer>
+
+</body>
+</html>
