@@ -113,10 +113,6 @@
       box-shadow: 0 5px 20px rgba(0,0,0,0.3);
     }
 
-    #ar-button:active {
-      transform: translateX(-50%) scale(0.95);
-    }
-
     .note {
       margin: 10px auto 30px;
       width: 90%;
@@ -142,25 +138,27 @@
   </div>
 
   <model-viewer
-    src="https://modelviewer.dev/shared-assets/models/NeilArmstrong.glb"
-    alt="3D astronaut model"
+    src="https://raw.githubusercontent.com/mikedh/trimesh/main/models/cube.glb"
+    alt="3D geometric cube"
     ar
     ar-modes="scene-viewer webxr quick-look"
+    ar-scale="fixed"
     camera-controls
     auto-rotate
     rotation-per-second="25deg"
     shadow-intensity="1"
     exposure="1"
+    loading="eager"
     touch-action="pan-y">
 
     <button slot="ar-button" id="ar-button">
-      ✦ VIEW IN YOUR SPACE ✦
+      ✦ VIEW CUBE IN YOUR SPACE ✦
     </button>
 
   </model-viewer>
 
   <div class="note">
-    Tap "VIEW IN YOUR SPACE" to try the 3D model in Augmented Reality.
+    Explore a 3D geometric cube in Augmented Reality.
   </div>
 
 </body>
