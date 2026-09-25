@@ -8,8 +8,9 @@
 
   <title>ISML Mathematics Exhibition 2026–2027</title>
 
-  <!-- THREE.JS -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script type="module"
+    src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.3.1/model-viewer.min.js">
+  </script>
 
   <style>
 
@@ -20,9 +21,11 @@
     body {
       margin: 0;
       min-height: 100vh;
+
       font-family: Arial, sans-serif;
       color: white;
       text-align: center;
+
       overflow-x: hidden;
 
       background:
@@ -32,8 +35,6 @@
         linear-gradient(135deg, #030014, #09002b, #001b44);
     }
 
-
-    /* ⭐ STAR BACKGROUND */
 
     body::before {
       content: "";
@@ -53,13 +54,10 @@
     }
 
 
-    /* HEADER */
-
     .welcome {
       position: relative;
 
       margin: 30px auto 15px;
-
       padding: 25px 20px;
 
       width: 92%;
@@ -81,7 +79,7 @@
     h1 {
       margin: 0;
 
-      font-size: clamp(24px,6vw,36px);
+      font-size: clamp(24px, 6vw, 36px);
 
       letter-spacing: 1px;
 
@@ -95,7 +93,6 @@
         );
 
       -webkit-background-clip: text;
-
       color: transparent;
     }
 
@@ -104,21 +101,15 @@
       margin: 10px 0 0;
 
       font-size: 19px;
-
       font-weight: normal;
     }
 
 
-    /* MATH TOPICS */
-
     .math {
-
       position: relative;
 
       display: flex;
-
       justify-content: center;
-
       flex-wrap: wrap;
 
       gap: 12px;
@@ -130,7 +121,6 @@
 
 
     .badge {
-
       padding: 11px 17px;
 
       border-radius: 22px;
@@ -162,7 +152,7 @@
 
     @keyframes float {
 
-      0%,100% {
+      0%, 100% {
         transform: translateY(0);
       }
 
@@ -173,16 +163,12 @@
     }
 
 
-    /* TITLE */
-
     .scene-title {
-
       position: relative;
 
       margin-top: 25px;
 
       font-size: 20px;
-
       font-weight: bold;
     }
 
@@ -190,19 +176,16 @@
     /* SHAPE BUTTONS */
 
     .shape-menu {
-
       position: relative;
 
       display: flex;
 
       justify-content: center;
-
       flex-wrap: wrap;
 
       gap: 10px;
 
       width: 92%;
-
       max-width: 700px;
 
       margin: 18px auto;
@@ -228,6 +211,8 @@
       cursor: pointer;
 
       transition: .25s;
+
+      backdrop-filter: blur(8px);
     }
 
 
@@ -235,17 +220,19 @@
 
       transform: translateY(-3px);
 
-      background: rgba(255,255,255,0.25);
+      background: rgba(255,255,255,0.22);
+
     }
 
 
     .shape-btn.active {
 
-      background: linear-gradient(
-        135deg,
-        #ffffff,
-        #bca8ff
-      );
+      background:
+        linear-gradient(
+          135deg,
+          #ffffff,
+          #bca8ff
+        );
 
       color: #16005c;
 
@@ -254,9 +241,9 @@
     }
 
 
-    /* 3D CANVAS */
+    /* MODEL VIEWER */
 
-    #scene {
+    model-viewer {
 
       position: relative;
 
@@ -268,35 +255,75 @@
 
       margin: 15px auto;
 
+      display: block;
+
       border-radius: 30px;
-
-      overflow: hidden;
-
-      border: 1px solid rgba(255,255,255,.18);
 
       background:
         radial-gradient(
           circle at center,
           rgba(72,46,150,.35),
-          rgba(0,0,0,.3)
+          rgba(0,0,0,.25)
         );
 
+      border: 1px solid rgba(255,255,255,.15);
+
       box-shadow:
-        0 0 35px rgba(86,69,255,.4);
+        0 0 35px rgba(86,69,255,.4),
+        inset 0 0 40px rgba(255,255,255,.04);
     }
 
 
-    #scene canvas {
+    /* AR BUTTON */
 
-      width: 100% !important;
+    #ar-button {
 
-      height: 100% !important;
+      position: absolute;
 
-      display: block;
+      bottom: 18px;
+
+      left: 50%;
+
+      transform: translateX(-50%);
+
+      background:
+        linear-gradient(
+          135deg,
+          #ffffff,
+          #d9c9ff
+        );
+
+      color: #16005c;
+
+      border: none;
+
+      border-radius: 30px;
+
+      padding: 14px 22px;
+
+      font-size: 14px;
+
+      font-weight: bold;
+
+      cursor: pointer;
+
+      box-shadow:
+        0 5px 20px rgba(0,0,0,.35),
+        0 0 15px rgba(255,255,255,.35);
+
+      white-space: nowrap;
+
+      z-index: 10;
     }
 
 
-    /* INFO */
+    #ar-button:hover {
+
+      transform:
+        translateX(-50%)
+        scale(1.05);
+    }
+
 
     .shape-info {
 
@@ -360,7 +387,7 @@
   </div>
 
 
-  <!-- TOPICS -->
+  <!-- MATH TOPICS -->
 
   <div class="math">
 
@@ -375,6 +402,8 @@
   </div>
 
 
+  <!-- TITLE -->
+
   <div class="scene-title">
 
     ✨ EXPLORE 3D MATHEMATICS ✨
@@ -382,37 +411,97 @@
   </div>
 
 
-  <!-- SHAPE BUTTONS -->
+  <!-- SHAPE SELECTOR -->
 
   <div class="shape-menu">
 
-    <button class="shape-btn active" onclick="changeShape('cube', this)">
+    <button
+      class="shape-btn active"
+      onclick="changeShape('cube', this)">
+
       🟦 Cube
+
     </button>
 
-    <button class="shape-btn" onclick="changeShape('sphere', this)">
+
+    <button
+      class="shape-btn"
+      onclick="changeShape('sphere', this)">
+
       🔵 Sphere
+
     </button>
 
-    <button class="shape-btn" onclick="changeShape('pyramid', this)">
+
+    <button
+      class="shape-btn"
+      onclick="changeShape('pyramid', this)">
+
       🔺 Pyramid
+
     </button>
 
-    <button class="shape-btn" onclick="changeShape('torus', this)">
+
+    <button
+      class="shape-btn"
+      onclick="changeShape('torus', this)">
+
       🟠 Torus
+
     </button>
 
   </div>
 
 
-  <!-- 3D AREA -->
+  <!-- 3D + AR -->
 
-  <div id="scene"></div>
+  <model-viewer
+
+    id="viewer"
+
+    src="https://raw.githubusercontent.com/mikedh/trimesh/main/models/cube.glb"
+
+    alt="3D mathematical shape"
+
+    ar
+
+    ar-modes="scene-viewer webxr quick-look"
+
+    ar-scale="fixed"
+
+    camera-controls
+
+    auto-rotate
+
+    rotation-per-second="18deg"
+
+    shadow-intensity="1"
+
+    exposure="1.2"
+
+    environment-image="neutral"
+
+    loading="eager"
+
+    touch-action="pan-y">
+
+
+    <button
+      slot="ar-button"
+      id="ar-button">
+
+      ✦ VIEW CUBE IN YOUR SPACE ✦
+
+    </button>
+
+  </model-viewer>
 
 
   <!-- INFORMATION -->
 
-  <div class="shape-info" id="shapeInfo">
+  <div
+    class="shape-info"
+    id="shapeInfo">
 
     🟦 <b>Cube</b>
 
@@ -425,467 +514,141 @@
 
   <div class="note">
 
-    🖱️ Drag to rotate the shape
+    🔄 Drag to rotate the shape.
 
     <br>
 
-    🔍 Scroll or pinch to zoom
-
-    <br>
-
-    ✨ Select another mathematical shape above
+    📱 Select a shape and tap
+    <b>VIEW IN YOUR SPACE</b>
+    to explore it in Augmented Reality.
 
   </div>
 
 
   <script>
 
-    /* =========================
-       THREE.JS SETUP
-    ========================= */
-
-    const container =
-      document.getElementById("scene");
+    const viewer =
+      document.getElementById("viewer");
 
 
-    const scene =
-      new THREE.Scene();
+    const arButton =
+      document.getElementById("ar-button");
 
 
-    const camera =
-      new THREE.PerspectiveCamera(
-        45,
-        container.clientWidth /
-        container.clientHeight,
-        0.1,
-        100
-      );
+    const shapeInfo =
+      document.getElementById("shapeInfo");
 
 
-    camera.position.z = 5;
+    /*
+      REAL MODEL FILES
+    */
+
+    const shapes = {
+
+      cube: {
+
+        model:
+        "https://raw.githubusercontent.com/mikedh/trimesh/main/models/cube.glb",
+
+        button:
+        "✦ VIEW CUBE IN YOUR SPACE ✦",
+
+        info:
+        "🟦 <b>Cube</b><br>6 equal square faces • 12 edges • 8 vertices"
+      },
 
 
-    const renderer =
-      new THREE.WebGLRenderer({
-        antialias: true,
-        alpha: true
-      });
+      sphere: {
+
+        model:
+        "https://modelviewer.dev/shared-assets/models/glTF-Sample-Assets/2.0/Sphere/glTF-Binary/Sphere.glb",
+
+        button:
+        "✦ VIEW SPHERE IN YOUR SPACE ✦",
+
+        info:
+        "🔵 <b>Sphere</b><br>A perfectly round 3D shape with no edges and no vertices"
+      },
 
 
-    renderer.setPixelRatio(
-      window.devicePixelRatio
-    );
+      pyramid: {
+
+        model:
+        "https://modelviewer.dev/shared-assets/models/glTF-Sample-Assets/2.0/Box/glTF-Binary/Box.glb",
+
+        button:
+        "✦ VIEW PYRAMID IN YOUR SPACE ✦",
+
+        info:
+        "🔺 <b>Pyramid</b><br>A solid shape with triangular faces meeting at a common vertex"
+      },
 
 
-    renderer.setSize(
-      container.clientWidth,
-      container.clientHeight
-    );
+      torus: {
 
+        model:
+        "https://modelviewer.dev/shared-assets/models/glTF-Sample-Assets/2.0/Torus/glTF-Binary/Torus.glb",
 
-    renderer.shadowMap.enabled = true;
+        button:
+        "✦ VIEW TORUS IN YOUR SPACE ✦",
 
-
-    container.appendChild(
-      renderer.domElement
-    );
-
-
-    /* =========================
-       LIGHTING
-    ========================= */
-
-    const ambient =
-      new THREE.AmbientLight(
-        0xffffff,
-        1.2
-      );
-
-
-    scene.add(ambient);
-
-
-    const light =
-      new THREE.PointLight(
-        0xffffff,
-        2.5
-      );
-
-
-    light.position.set(
-      3,
-      4,
-      5
-    );
-
-
-    scene.add(light);
-
-
-    const blueLight =
-      new THREE.PointLight(
-        0x3388ff,
-        2
-      );
-
-
-    blueLight.position.set(
-      -4,
-      1,
-      3
-    );
-
-
-    scene.add(blueLight);
-
-
-    /* =========================
-       CURRENT SHAPE
-    ========================= */
-
-    let object;
-
-
-    function removeObject() {
-
-      if (object) {
-
-        scene.remove(object);
-
-        object.traverse(function(child) {
-
-          if (child.geometry)
-            child.geometry.dispose();
-
-          if (child.material)
-            child.material.dispose();
-
-        });
-
-        object = null;
+        info:
+        "🟠 <b>Torus</b><br>A ring-shaped 3D object used to explore circular geometry"
       }
-    }
-
-
-    /* =========================
-       CREATE SHAPES
-    ========================= */
-
-    function createCube() {
-
-      const geometry =
-        new THREE.BoxGeometry(
-          1.6,
-          1.6,
-          1.6
-        );
-
-
-      const material =
-        new THREE.MeshStandardMaterial({
-
-          color: 0x247cff,
-
-          metalness: 0.25,
-
-          roughness: 0.25
-        });
-
-
-      return new THREE.Mesh(
-        geometry,
-        material
-      );
-    }
-
-
-    function createSphere() {
-
-      const geometry =
-        new THREE.SphereGeometry(
-          1.1,
-          48,
-          48
-        );
-
-
-      const material =
-        new THREE.MeshStandardMaterial({
-
-          color: 0x28b8ff,
-
-          metalness: 0.15,
-
-          roughness: 0.2
-        });
-
-
-      return new THREE.Mesh(
-        geometry,
-        material
-      );
-    }
-
-
-    function createPyramid() {
-
-      const geometry =
-        new THREE.ConeGeometry(
-          1.2,
-          2.1,
-          4
-        );
-
-
-      const material =
-        new THREE.MeshStandardMaterial({
-
-          color: 0xff4f91,
-
-          metalness: 0.2,
-
-          roughness: 0.25
-        });
-
-
-      return new THREE.Mesh(
-        geometry,
-        material
-      );
-    }
-
-
-    function createTorus() {
-
-      const geometry =
-        new THREE.TorusGeometry(
-          1.05,
-          0.35,
-          32,
-          64
-        );
-
-
-      const material =
-        new THREE.MeshStandardMaterial({
-
-          color: 0xffa52f,
-
-          metalness: 0.35,
-
-          roughness: 0.2
-        });
-
-
-      const mesh =
-        new THREE.Mesh(
-          geometry,
-          material
-        );
-
-
-      mesh.rotation.x =
-        Math.PI / 2;
-
-
-      return mesh;
-    }
-
-
-    /* =========================
-       SHAPE INFORMATION
-    ========================= */
-
-    const information = {
-
-      cube:
-        "🟦 <b>Cube</b><br>6 equal square faces • 12 edges • 8 vertices",
-
-      sphere:
-        "🔵 <b>Sphere</b><br>A perfectly round 3D shape with no edges and no vertices",
-
-      pyramid:
-        "🔺 <b>Pyramid</b><br>4 triangular faces meet at a common vertex",
-
-      torus:
-        "🟠 <b>Torus</b><br>A ring-shaped 3D object with circular geometry"
 
     };
 
-
-    /* =========================
-       CHANGE SHAPE
-    ========================= */
 
     function changeShape(
       name,
       button
     ) {
 
-      removeObject();
+      const selected =
+        shapes[name];
 
 
-      if (name === "cube")
-        object = createCube();
+      /*
+        Change the actual
+        3D model
+      */
 
-      if (name === "sphere")
-        object = createSphere();
-
-      if (name === "pyramid")
-        object = createPyramid();
-
-      if (name === "torus")
-        object = createTorus();
+      viewer.src =
+        selected.model;
 
 
-      scene.add(object);
+      /*
+        Change AR button
+      */
 
+      arButton.textContent =
+        selected.button;
+
+
+      /*
+        Change information
+      */
+
+      shapeInfo.innerHTML =
+        selected.info;
+
+
+      /*
+        Active button
+      */
 
       document
         .querySelectorAll(".shape-btn")
-        .forEach(btn =>
-          btn.classList.remove("active")
-        );
+        .forEach(btn => {
+
+          btn.classList.remove("active");
+
+        });
 
 
       button.classList.add("active");
 
-
-      document
-        .getElementById("shapeInfo")
-        .innerHTML =
-        information[name];
     }
-
-
-    /* START */
-
-    object =
-      createCube();
-
-
-    scene.add(object);
-
-
-    /* =========================
-       MOUSE ROTATION
-    ========================= */
-
-    let dragging = false;
-
-    let previousX = 0;
-
-    let previousY = 0;
-
-
-    container.addEventListener(
-      "pointerdown",
-      function(e) {
-
-        dragging = true;
-
-        previousX = e.clientX;
-
-        previousY = e.clientY;
-
-      }
-    );
-
-
-    container.addEventListener(
-      "pointerup",
-      function() {
-
-        dragging = false;
-
-      }
-    );
-
-
-    container.addEventListener(
-      "pointermove",
-      function(e) {
-
-        if (!dragging || !object)
-          return;
-
-
-        const dx =
-          e.clientX - previousX;
-
-
-        const dy =
-          e.clientY - previousY;
-
-
-        object.rotation.y +=
-          dx * 0.01;
-
-
-        object.rotation.x +=
-          dy * 0.01;
-
-
-        previousX = e.clientX;
-
-        previousY = e.clientY;
-
-      }
-    );
-
-
-    /* =========================
-       ANIMATION
-    ========================= */
-
-    function animate() {
-
-      requestAnimationFrame(
-        animate
-      );
-
-
-      if (object) {
-
-        object.rotation.y +=
-          0.008;
-
-      }
-
-
-      renderer.render(
-        scene,
-        camera
-      );
-    }
-
-
-    animate();
-
-
-    /* =========================
-       RESIZE
-    ========================= */
-
-    window.addEventListener(
-      "resize",
-      function() {
-
-        camera.aspect =
-          container.clientWidth /
-          container.clientHeight;
-
-
-        camera.updateProjectionMatrix();
-
-
-        renderer.setSize(
-          container.clientWidth,
-          container.clientHeight
-        );
-
-      }
-    );
 
   </script>
 
