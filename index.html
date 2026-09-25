@@ -1,232 +1,167 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ISML Mathematics Exhibition 2026 - 2027</title>
 
-  <!-- Google Model Viewer Library for WebAR -->
-  <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>ISML Mathematics Exhibition 2026–2027</title>
+
+  <script type="module"
+    src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.3.1/model-viewer.min.js">
+  </script>
 
   <style>
     * {
       box-sizing: border-box;
+    }
+
+    body {
       margin: 0;
-      padding: 0;
-    }
-
-    body, html {
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      background: #050510;
-      font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    }
-
-    /* 3D AR Model Viewer canvas */
-    model-viewer {
-      width: 100vw;
-      height: 100vh;
-      background: radial-gradient(circle, #1a0033 0%, #050510 100%);
-    }
-
-    /* Floating Header - Welcome Bloom Animation */
-    .header-overlay {
-      position: absolute;
-      top: 24px;
-      width: 90%;
-      left: 5%;
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #09002b, #16005c, #001b44);
+      color: white;
       text-align: center;
-      pointer-events: none;
-      z-index: 10;
+      overflow-x: hidden;
     }
 
-    .welcome-card {
-      display: inline-block;
-      background: rgba(10, 5, 30, 0.85);
-      border: 2px solid #00e5ff;
-      border-radius: 18px;
-      padding: 14px 24px;
-      box-shadow: 0 0 25px rgba(0, 229, 255, 0.8), inset 0 0 15px rgba(255, 0, 255, 0.4);
-      animation: bloomFade 6s ease-in-out infinite;
-      backdrop-filter: blur(8px);
-    }
-
-    .welcome-title {
-      font-size: 19px;
-      font-weight: 800;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      background: linear-gradient(90deg, #00e5ff, #ffffff, #ff00ff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: glowText 2s ease-in-out infinite alternate;
-    }
-
-    .welcome-year {
-      font-size: 14px;
-      color: #00ffcc;
-      margin-top: 5px;
-      font-weight: 700;
-      letter-spacing: 2px;
-    }
-
-    @keyframes glowText {
-      from { filter: drop-shadow(0 0 2px #00e5ff); }
-      to { filter: drop-shadow(0 0 12px #ff00ff); }
-    }
-
-    @keyframes bloomFade {
-      0% {
-        opacity: 0;
-        transform: scale(0.65) translateY(25px);
-      }
-      20% {
-        opacity: 1;
-        transform: scale(1) translateY(0);
-      }
-      80% {
-        opacity: 1;
-        transform: scale(1) translateY(0);
-      }
-      100% {
-        opacity: 0;
-        transform: scale(0.8) translateY(-15px);
-      }
-    }
-
-    /* Floating Math Concept Pills */
-    .floating-container {
-      position: absolute;
-      top: 110px;
-      width: 100%;
-      height: 65vh;
-      pointer-events: none;
-      z-index: 5;
-    }
-
-    .math-badge {
-      position: absolute;
-      padding: 8px 16px;
+    .welcome {
+      margin: 35px auto 20px;
+      padding: 25px;
+      width: 90%;
+      max-width: 700px;
       border-radius: 25px;
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: 0.5px;
+      background: rgba(255,255,255,0.12);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 0 30px rgba(255,255,255,0.15);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 30px;
+    }
+
+    h2 {
+      margin-top: 10px;
+      font-size: 20px;
+      font-weight: normal;
+    }
+
+    .math {
       display: flex;
-      align-items: center;
-      gap: 6px;
-      backdrop-filter: blur(6px);
-      animation: floatMotion 4s ease-in-out infinite alternate;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin: 25px auto;
+      width: 90%;
     }
 
-    .badge-1 {
-      top: 10%;
-      left: 6%;
-      color: #00ffff;
-      border: 1.5px solid #00ffff;
-      background: rgba(0, 255, 255, 0.18);
-      box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
-      animation-duration: 3.2s;
+    .badge {
+      padding: 12px 18px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.15);
+      font-weight: bold;
+      animation: float 3s ease-in-out infinite;
     }
 
-    .badge-2 {
-      top: 30%;
-      right: 6%;
-      color: #ff33cc;
-      border: 1.5px solid #ff33cc;
-      background: rgba(255, 51, 204, 0.18);
-      box-shadow: 0 0 15px rgba(255, 51, 204, 0.5);
-      animation-duration: 4.2s;
+    .badge:nth-child(2) {
+      animation-delay: 0.5s;
     }
 
-    .badge-3 {
-      top: 55%;
-      left: 10%;
-      color: #ffee00;
-      border: 1.5px solid #ffee00;
-      background: rgba(255, 238, 0, 0.18);
-      box-shadow: 0 0 15px rgba(255, 238, 0, 0.5);
-      animation-duration: 3.7s;
+    .badge:nth-child(3) {
+      animation-delay: 1s;
     }
 
-    .badge-4 {
-      top: 72%;
-      right: 8%;
-      color: #00ff88;
-      border: 1.5px solid #00ff88;
-      background: rgba(0, 255, 136, 0.18);
-      box-shadow: 0 0 15px rgba(0, 255, 136, 0.5);
-      animation-duration: 4.5s;
+    .badge:nth-child(4) {
+      animation-delay: 1.5s;
     }
 
-    @keyframes floatMotion {
-      from { transform: translateY(0px) rotate(-2deg); }
-      to { transform: translateY(-16px) rotate(2deg); }
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-8px);
+      }
     }
 
-    /* Start AR Action Button */
+    model-viewer {
+      width: 90%;
+      max-width: 700px;
+      height: 450px;
+      margin: 20px auto;
+      display: block;
+      border-radius: 25px;
+      background: rgba(255,255,255,0.08);
+    }
+
     #ar-button {
       position: absolute;
-      bottom: 30px;
+      bottom: 20px;
       left: 50%;
       transform: translateX(-50%);
-      background: linear-gradient(135deg, #00e5ff, #ff00c8);
-      color: #ffffff;
-      font-weight: 800;
+      background: white;
+      color: #16005c;
       border: none;
-      border-radius: 40px;
-      padding: 15px 32px;
+      border-radius: 25px;
+      padding: 15px 25px;
       font-size: 15px;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      box-shadow: 0 0 25px rgba(0, 229, 255, 0.9);
+      font-weight: bold;
       cursor: pointer;
-      z-index: 100;
-      animation: pulseBtn 1.8s infinite;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.3);
     }
 
-    @keyframes pulseBtn {
-      0% { transform: translateX(-50%) scale(1); }
-      50% { transform: translateX(-50%) scale(1.05); }
-      100% { transform: translateX(-50%) scale(1); }
+    #ar-button:active {
+      transform: translateX(-50%) scale(0.95);
+    }
+
+    .note {
+      margin: 10px auto 30px;
+      width: 90%;
+      max-width: 600px;
+      font-size: 14px;
+      opacity: 0.8;
     }
   </style>
 </head>
 
 <body>
 
-  <!-- Floating Welcome Sign -->
-  <div class="header-overlay">
-    <div class="welcome-card">
-      <div class="welcome-title">WELCOME TO<br>ISML MATHS EXHIBITION</div>
-      <div class="welcome-year">2026 - 2027</div>
-    </div>
+  <div class="welcome">
+    <h1>WELCOME TO ISML MATHS EXHIBITION</h1>
+    <h2>2026 – 2027</h2>
   </div>
 
-  <!-- Floating Math Concepts -->
-  <div class="floating-container">
-    <div class="math-badge badge-1">📐 Trigonometry &bull; sin²θ + cos²θ = 1</div>
-    <div class="math-badge badge-2">🍕 Fractions &bull; ½ + ¼ = ¾</div>
-    <div class="math-badge badge-3">∫ Calculus &bull; dy/dx &bull; ∫ f(x)dx</div>
-    <div class="math-badge badge-4">🔺 Geometry &bull; A = πr² &bull; a² + b² = c²</div>
+  <div class="math">
+    <div class="badge">📐 Geometry</div>
+    <div class="badge">➗ Fractions</div>
+    <div class="badge">📊 Calculus</div>
+    <div class="badge">📈 Trigonometry</div>
   </div>
 
-  <!-- 3D AR Viewer (World Tracking for iOS and Android) -->
-  <model-viewer 
-    src="https://models.readyplayer.me/64633190a077de29911667b2.glb?morphTargets=none" 
-    alt="Glowing Fantasy Tree"
-    ar 
-    ar-modes="webxr scene-viewer quick-look" 
-    camera-controls 
-    auto-rotate 
+  <model-viewer
+    src="https://modelviewer.dev/shared-assets/models/NeilArmstrong.glb"
+    alt="3D astronaut model"
+    ar
+    ar-modes="scene-viewer webxr quick-look"
+    camera-controls
+    auto-rotate
     rotation-per-second="25deg"
-    shadow-intensity="1.5"
-    exposure="1.2">
-    
+    shadow-intensity="1"
+    exposure="1"
+    touch-action="pan-y">
+
     <button slot="ar-button" id="ar-button">
-      ✦ VIEW IN YOUR SPACE (AR) ✦
+      ✦ VIEW IN YOUR SPACE ✦
     </button>
+
   </model-viewer>
+
+  <div class="note">
+    Tap "VIEW IN YOUR SPACE" to try the 3D model in Augmented Reality.
+  </div>
 
 </body>
 </html>
