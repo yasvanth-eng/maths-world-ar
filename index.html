@@ -13,6 +13,7 @@
   </script>
 
   <style>
+
     * {
       box-sizing: border-box;
     }
@@ -20,9 +21,12 @@
     body {
       margin: 0;
       min-height: 100vh;
+
       font-family: Arial, sans-serif;
+
       color: white;
       text-align: center;
+
       overflow-x: hidden;
 
       background:
@@ -32,28 +36,41 @@
         linear-gradient(135deg, #030014, #09002b, #001b44);
     }
 
-    /* Stars */
+
+    /* ⭐ Stars */
 
     body::before {
+
       content: "";
+
       position: fixed;
+
       inset: 0;
+
       pointer-events: none;
 
       background-image:
         radial-gradient(white 1px, transparent 1px),
         radial-gradient(white 1px, transparent 1px);
 
-      background-size: 70px 70px, 110px 110px;
-      background-position: 0 0, 35px 45px;
+      background-size:
+        70px 70px,
+        110px 110px;
+
+      background-position:
+        0 0,
+        35px 45px;
 
       opacity: 0.35;
     }
 
-    /* Header */
+
+    /* HEADER */
 
     .welcome {
+
       margin: 30px auto 15px;
+
       padding: 25px 20px;
 
       width: 92%;
@@ -61,55 +78,75 @@
 
       border-radius: 28px;
 
-      background: rgba(255, 255, 255, 0.10);
+      background: rgba(255,255,255,0.10);
+
       backdrop-filter: blur(15px);
 
-      border: 1px solid rgba(255, 255, 255, 0.18);
+      border: 1px solid rgba(255,255,255,0.18);
 
       box-shadow:
-        0 0 30px rgba(116, 80, 255, 0.35),
+        0 0 30px rgba(116,80,255,0.35),
         inset 0 0 20px rgba(255,255,255,0.05);
     }
 
+
     h1 {
+
       margin: 0;
-      font-size: clamp(24px, 6vw, 36px);
+
+      font-size: clamp(24px,6vw,36px);
+
       letter-spacing: 1px;
 
-      background: linear-gradient(
-        90deg,
-        #ffffff,
-        #75d7ff,
-        #c28cff,
-        #ffffff
-      );
+      background:
+        linear-gradient(
+          90deg,
+          #ffffff,
+          #75d7ff,
+          #c28cff,
+          #ffffff
+        );
 
       -webkit-background-clip: text;
+
       color: transparent;
     }
 
+
     h2 {
+
       margin: 10px 0 0;
+
       font-size: 19px;
+
       font-weight: normal;
+
       opacity: 0.9;
     }
 
-    /* Maths badges */
+
+    /* MATH TOPICS */
 
     .math {
+
       display: flex;
+
       justify-content: center;
+
       flex-wrap: wrap;
 
       gap: 12px;
 
       margin: 22px auto;
+
       width: 92%;
+
       max-width: 700px;
     }
 
+
     .badge {
+
       padding: 11px 17px;
 
       border-radius: 22px;
@@ -127,8 +164,9 @@
       animation: float 3s ease-in-out infinite;
     }
 
+
     .badge:nth-child(2) {
-      animation-delay: 0.5s;
+      animation-delay: .5s;
     }
 
     .badge:nth-child(3) {
@@ -139,28 +177,111 @@
       animation-delay: 1.5s;
     }
 
+
     @keyframes float {
-      0%, 100% {
+
+      0%,100% {
         transform: translateY(0);
       }
 
       50% {
         transform: translateY(-7px);
       }
+
     }
 
-    /* 3D display */
+
+    /* TITLE */
 
     .scene-title {
+
       margin-top: 25px;
-      font-size: 18px;
+
+      font-size: 20px;
+
       font-weight: bold;
+
       letter-spacing: 1px;
     }
 
-    model-viewer {
-      width: 88%;
+
+    /* SHAPE BUTTONS */
+
+    .shape-menu {
+
+      display: flex;
+
+      justify-content: center;
+
+      flex-wrap: wrap;
+
+      gap: 10px;
+
+      width: 92%;
+
       max-width: 650px;
+
+      margin: 18px auto;
+    }
+
+
+    .shape-btn {
+
+      border: 1px solid rgba(255,255,255,0.25);
+
+      background: rgba(255,255,255,0.12);
+
+      color: white;
+
+      padding: 11px 18px;
+
+      border-radius: 25px;
+
+      font-size: 14px;
+
+      font-weight: bold;
+
+      cursor: pointer;
+
+      transition: .25s;
+
+      backdrop-filter: blur(8px);
+    }
+
+
+    .shape-btn:hover {
+
+      transform: translateY(-3px);
+
+      background: rgba(255,255,255,0.22);
+
+      box-shadow: 0 0 18px rgba(120,180,255,.4);
+    }
+
+
+    .shape-btn.active {
+
+      background: linear-gradient(
+        135deg,
+        #ffffff,
+        #bca8ff
+      );
+
+      color: #16005c;
+
+      box-shadow:
+        0 0 20px rgba(190,160,255,.6);
+    }
+
+
+    /* 3D VIEWER */
+
+    model-viewer {
+
+      width: 88%;
+
+      max-width: 650px;
+
       height: 390px;
 
       margin: 15px auto;
@@ -172,32 +293,36 @@
       background:
         radial-gradient(
           circle at center,
-          rgba(72, 46, 150, 0.35),
-          rgba(0, 0, 0, 0.15)
+          rgba(72,46,150,.35),
+          rgba(0,0,0,.15)
         );
 
-      border: 1px solid rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,.15);
 
       box-shadow:
-        0 0 35px rgba(86, 69, 255, 0.35),
-        inset 0 0 40px rgba(255,255,255,0.04);
+        0 0 35px rgba(86,69,255,.35),
+        inset 0 0 40px rgba(255,255,255,.04);
     }
 
-    /* AR Button */
+
+    /* AR BUTTON */
 
     #ar-button {
+
       position: absolute;
 
       bottom: 18px;
+
       left: 50%;
 
       transform: translateX(-50%);
 
-      background: linear-gradient(
-        135deg,
-        #ffffff,
-        #d9c9ff
-      );
+      background:
+        linear-gradient(
+          135deg,
+          #ffffff,
+          #d9c9ff
+        );
 
       color: #16005c;
 
@@ -214,40 +339,61 @@
       cursor: pointer;
 
       box-shadow:
-        0 5px 20px rgba(0,0,0,0.35),
-        0 0 15px rgba(255,255,255,0.35);
+        0 5px 20px rgba(0,0,0,.35),
+        0 0 15px rgba(255,255,255,.35);
 
-      transition: 0.25s;
+      white-space: nowrap;
     }
 
-    #ar-button:hover {
-      transform: translateX(-50%) scale(1.05);
-    }
 
-    /* Description */
+    /* DESCRIPTION */
 
-    .note {
-      margin: 15px auto 35px;
+    .shape-info {
 
-      width: 90%;
-      max-width: 620px;
+      margin: 15px auto;
+
+      width: 88%;
+
+      max-width: 600px;
+
+      padding: 15px;
+
+      border-radius: 18px;
+
+      background: rgba(255,255,255,.08);
+
+      border: 1px solid rgba(255,255,255,.12);
 
       font-size: 14px;
 
       line-height: 1.6;
-
-      opacity: 0.8;
     }
 
-    .highlight {
-      color: #8bdcff;
-      font-weight: bold;
+
+    .note {
+
+      margin: 15px auto 35px;
+
+      width: 90%;
+
+      max-width: 620px;
+
+      font-size: 13px;
+
+      opacity: .75;
+
+      line-height: 1.6;
     }
 
   </style>
+
 </head>
 
+
 <body>
+
+
+  <!-- HEADER -->
 
   <div class="welcome">
 
@@ -262,6 +408,8 @@
   </div>
 
 
+  <!-- TOPICS -->
+
   <div class="math">
 
     <div class="badge">📐 Geometry</div>
@@ -275,18 +423,66 @@
   </div>
 
 
+  <!-- TITLE -->
+
   <div class="scene-title">
 
-    ✨ EXPLORE MATHEMATICS IN 3D ✨
+    ✨ EXPLORE 3D MATHEMATICS ✨
 
   </div>
 
 
+  <!-- SHAPE MENU -->
+
+  <div class="shape-menu">
+
+    <button
+      class="shape-btn active"
+      onclick="changeShape('cube')">
+
+      🟦 Cube
+
+    </button>
+
+
+    <button
+      class="shape-btn"
+      onclick="changeShape('sphere')">
+
+      🔵 Sphere
+
+    </button>
+
+
+    <button
+      class="shape-btn"
+      onclick="changeShape('pyramid')">
+
+      🔺 Pyramid
+
+    </button>
+
+
+    <button
+      class="shape-btn"
+      onclick="changeShape('torus')">
+
+      🟠 Torus
+
+    </button>
+
+  </div>
+
+
+  <!-- 3D VIEWER -->
+
   <model-viewer
+
+    id="viewer"
 
     src="https://raw.githubusercontent.com/mikedh/trimesh/main/models/cube.glb"
 
-    alt="3D mathematical geometric object"
+    alt="3D mathematical shape"
 
     ar
 
@@ -315,24 +511,150 @@
       slot="ar-button"
       id="ar-button">
 
-      ✦ VIEW 3D SHAPE IN YOUR SPACE ✦
+      ✦ VIEW CUBE IN YOUR SPACE ✦
 
     </button>
-
 
   </model-viewer>
 
 
-  <div class="note">
+  <!-- INFORMATION -->
 
-    Discover <span class="highlight">geometry in augmented reality</span>
-    and explore mathematical shapes in 3D.
+  <div
+    class="shape-info"
+    id="shapeInfo">
+
+    🟦 <b>Cube</b>
 
     <br>
 
-    Move your phone around and place the object in your surroundings! 🚀
+    A solid shape with 6 equal square faces,
+    12 edges and 8 vertices.
 
   </div>
+
+
+  <div class="note">
+
+    🔄 Drag to rotate the shape.
+
+    <br>
+
+    📱 Select a shape and tap
+    <b>VIEW IN YOUR SPACE</b>
+    to explore it in Augmented Reality.
+
+  </div>
+
+
+  <script>
+
+    const viewer =
+      document.getElementById("viewer");
+
+    const arButton =
+      document.getElementById("ar-button");
+
+    const shapeInfo =
+      document.getElementById("shapeInfo");
+
+
+    const shapes = {
+
+      cube: {
+
+        model:
+        "https://raw.githubusercontent.com/mikedh/trimesh/main/models/cube.glb",
+
+        button:
+        "✦ VIEW CUBE IN YOUR SPACE ✦",
+
+        info:
+        "🟦 <b>Cube</b><br>A solid shape with 6 equal square faces, 12 edges and 8 vertices."
+      },
+
+
+      sphere: {
+
+        model:
+        "https://modelviewer.dev/shared-assets/models/Astronaut.glb",
+
+        button:
+        "✦ VIEW SPHERE IN YOUR SPACE ✦",
+
+        info:
+        "🔵 <b>Sphere</b><br>A perfectly round 3D shape with no edges or vertices."
+      },
+
+
+      pyramid: {
+
+        model:
+        "https://raw.githubusercontent.com/mikedh/trimesh/main/models/cube.glb",
+
+        button:
+        "✦ VIEW PYRAMID IN YOUR SPACE ✦",
+
+        info:
+        "🔺 <b>Pyramid</b><br>A solid shape with triangular faces meeting at a common vertex."
+      },
+
+
+      torus: {
+
+        model:
+        "https://raw.githubusercontent.com/mikedh/trimesh/main/models/cube.glb",
+
+        button:
+        "✦ VIEW TORUS IN YOUR SPACE ✦",
+
+        info:
+        "🟠 <b>Torus</b><br>A ring-shaped 3D object commonly used to explore circular geometry."
+      }
+
+    };
+
+
+    function changeShape(name) {
+
+      const selected =
+        shapes[name];
+
+
+      /* Change model */
+
+      viewer.src =
+        selected.model;
+
+
+      /* Change AR button */
+
+      arButton.textContent =
+        selected.button;
+
+
+      /* Change information */
+
+      shapeInfo.innerHTML =
+        selected.info;
+
+
+      /* Active button */
+
+      document
+        .querySelectorAll(".shape-btn")
+        .forEach(button => {
+
+          button.classList.remove("active");
+
+        });
+
+
+      event.target.classList.add("active");
+
+    }
+
+  </script>
 
 
 </body>
