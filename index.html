@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,48 +21,109 @@
       margin: 0;
       min-height: 100vh;
       font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #09002b, #16005c, #001b44);
       color: white;
       text-align: center;
       overflow-x: hidden;
+
+      background:
+        radial-gradient(circle at 20% 20%, #5521b5 0%, transparent 25%),
+        radial-gradient(circle at 80% 30%, #0066cc 0%, transparent 25%),
+        radial-gradient(circle at 50% 90%, #320078 0%, transparent 30%),
+        linear-gradient(135deg, #030014, #09002b, #001b44);
     }
 
+    /* Stars */
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+
+      background-image:
+        radial-gradient(white 1px, transparent 1px),
+        radial-gradient(white 1px, transparent 1px);
+
+      background-size: 70px 70px, 110px 110px;
+      background-position: 0 0, 35px 45px;
+
+      opacity: 0.35;
+    }
+
+    /* Header */
+
     .welcome {
-      margin: 35px auto 20px;
-      padding: 25px;
-      width: 90%;
-      max-width: 700px;
-      border-radius: 25px;
-      background: rgba(255,255,255,0.12);
-      backdrop-filter: blur(10px);
-      box-shadow: 0 0 30px rgba(255,255,255,0.15);
+      margin: 30px auto 15px;
+      padding: 25px 20px;
+
+      width: 92%;
+      max-width: 720px;
+
+      border-radius: 28px;
+
+      background: rgba(255, 255, 255, 0.10);
+      backdrop-filter: blur(15px);
+
+      border: 1px solid rgba(255, 255, 255, 0.18);
+
+      box-shadow:
+        0 0 30px rgba(116, 80, 255, 0.35),
+        inset 0 0 20px rgba(255,255,255,0.05);
     }
 
     h1 {
       margin: 0;
-      font-size: 30px;
+      font-size: clamp(24px, 6vw, 36px);
+      letter-spacing: 1px;
+
+      background: linear-gradient(
+        90deg,
+        #ffffff,
+        #75d7ff,
+        #c28cff,
+        #ffffff
+      );
+
+      -webkit-background-clip: text;
+      color: transparent;
     }
 
     h2 {
-      margin-top: 10px;
-      font-size: 20px;
+      margin: 10px 0 0;
+      font-size: 19px;
       font-weight: normal;
+      opacity: 0.9;
     }
+
+    /* Maths badges */
 
     .math {
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
+
       gap: 12px;
-      margin: 25px auto;
-      width: 90%;
+
+      margin: 22px auto;
+      width: 92%;
+      max-width: 700px;
     }
 
     .badge {
-      padding: 12px 18px;
-      border-radius: 20px;
-      background: rgba(255,255,255,0.15);
+      padding: 11px 17px;
+
+      border-radius: 22px;
+
+      background: rgba(255,255,255,0.12);
+
+      border: 1px solid rgba(255,255,255,0.18);
+
       font-weight: bold;
+
+      backdrop-filter: blur(10px);
+
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+
       animation: float 3s ease-in-out infinite;
     }
 
@@ -83,83 +145,197 @@
       }
 
       50% {
-        transform: translateY(-8px);
+        transform: translateY(-7px);
       }
     }
 
-    model-viewer {
-      width: 90%;
-      max-width: 700px;
-      height: 450px;
-      margin: 20px auto;
-      display: block;
-      border-radius: 25px;
-      background: rgba(255,255,255,0.08);
+    /* 3D display */
+
+    .scene-title {
+      margin-top: 25px;
+      font-size: 18px;
+      font-weight: bold;
+      letter-spacing: 1px;
     }
+
+    model-viewer {
+      width: 88%;
+      max-width: 650px;
+      height: 390px;
+
+      margin: 15px auto;
+
+      display: block;
+
+      border-radius: 30px;
+
+      background:
+        radial-gradient(
+          circle at center,
+          rgba(72, 46, 150, 0.35),
+          rgba(0, 0, 0, 0.15)
+        );
+
+      border: 1px solid rgba(255,255,255,0.15);
+
+      box-shadow:
+        0 0 35px rgba(86, 69, 255, 0.35),
+        inset 0 0 40px rgba(255,255,255,0.04);
+    }
+
+    /* AR Button */
 
     #ar-button {
       position: absolute;
-      bottom: 20px;
+
+      bottom: 18px;
       left: 50%;
+
       transform: translateX(-50%);
-      background: white;
+
+      background: linear-gradient(
+        135deg,
+        #ffffff,
+        #d9c9ff
+      );
+
       color: #16005c;
+
       border: none;
-      border-radius: 25px;
-      padding: 15px 25px;
-      font-size: 15px;
+
+      border-radius: 30px;
+
+      padding: 13px 22px;
+
+      font-size: 14px;
+
       font-weight: bold;
+
       cursor: pointer;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+
+      box-shadow:
+        0 5px 20px rgba(0,0,0,0.35),
+        0 0 15px rgba(255,255,255,0.35);
+
+      transition: 0.25s;
     }
 
+    #ar-button:hover {
+      transform: translateX(-50%) scale(1.05);
+    }
+
+    /* Description */
+
     .note {
-      margin: 10px auto 30px;
+      margin: 15px auto 35px;
+
       width: 90%;
-      max-width: 600px;
+      max-width: 620px;
+
       font-size: 14px;
+
+      line-height: 1.6;
+
       opacity: 0.8;
     }
+
+    .highlight {
+      color: #8bdcff;
+      font-weight: bold;
+    }
+
   </style>
 </head>
 
 <body>
 
   <div class="welcome">
-    <h1>WELCOME TO ISML MATHS EXHIBITION</h1>
-    <h2>2026 – 2027</h2>
+
+    <h1>
+      WELCOME TO ISML MATHS EXHIBITION
+    </h1>
+
+    <h2>
+      2026 – 2027
+    </h2>
+
   </div>
+
 
   <div class="math">
+
     <div class="badge">📐 Geometry</div>
+
     <div class="badge">➗ Fractions</div>
+
     <div class="badge">📊 Calculus</div>
+
     <div class="badge">📈 Trigonometry</div>
+
   </div>
 
+
+  <div class="scene-title">
+
+    ✨ EXPLORE MATHEMATICS IN 3D ✨
+
+  </div>
+
+
   <model-viewer
+
     src="https://raw.githubusercontent.com/mikedh/trimesh/main/models/cube.glb"
-    alt="3D geometric cube"
+
+    alt="3D mathematical geometric object"
+
     ar
+
     ar-modes="scene-viewer webxr quick-look"
+
     ar-scale="fixed"
+
     camera-controls
+
     auto-rotate
-    rotation-per-second="25deg"
+
+    rotation-per-second="18deg"
+
     shadow-intensity="1"
-    exposure="1"
+
+    exposure="1.2"
+
+    environment-image="neutral"
+
     loading="eager"
+
     touch-action="pan-y">
 
-    <button slot="ar-button" id="ar-button">
-      ✦ VIEW CUBE IN YOUR SPACE ✦
+
+    <button
+      slot="ar-button"
+      id="ar-button">
+
+      ✦ VIEW 3D SHAPE IN YOUR SPACE ✦
+
     </button>
+
 
   </model-viewer>
 
+
   <div class="note">
-    Explore a 3D geometric cube in Augmented Reality.
+
+    Discover <span class="highlight">geometry in augmented reality</span>
+    and explore mathematical shapes in 3D.
+
+    <br>
+
+    Move your phone around and place the object in your surroundings! 🚀
+
   </div>
 
+
 </body>
+
 </html>
+```
